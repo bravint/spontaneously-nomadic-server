@@ -9,7 +9,7 @@ Uses
 Passport.js with bcrypt, jsonwebtoken to handle user authentication\
 Joi to validate requests to the server\
 Prisma ORM to handle database requests\
-PostgreSQL database to store client data\
+PostgreSQL database to store client data
 
 ## Install
 
