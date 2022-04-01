@@ -16,4 +16,4 @@ PostgreSQL database to store client data
 Install dependencies: <code>npm install</code>\
 Start server: <code>npm run dev</code>
 
-*Optional* Compile .ts files to /dist folder: <code>npm build</code>
+*Optional*: Compile .ts files to /dist folder: <code>npm build</code>
