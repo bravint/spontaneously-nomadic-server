@@ -6,10 +6,10 @@ An express server for https://github.com/bravint/spontaneous-nomad-client
 
 Uses 
 
-Passport.js with bcrypt, jsonwebtoken to handle user authentication
-Joi to validate requests to the server
-Prisma ORM to handle database requests
-PostgreSQL database to store client data
+Passport.js with bcrypt, jsonwebtoken to handle user authentication\
+Joi to validate requests to the server\
+Prisma ORM to handle database requests\
+PostgreSQL database to store client data\
 
 ## Install
 
