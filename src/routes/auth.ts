@@ -1,7 +1,8 @@
 import passport from 'passport';
 import { Router } from 'express';
 
-import { returnUserToClient, completeOAuth } from '../controllers/auth';
+import { returnUserToClient, completeOAuth, userRegister } from '../controllers/auth';
+import { callPassportLocal } from '../utils/passport/middleware/local';
 import { callPassportJwt } from '../utils/passport/middleware/jwt';
 
 import { CLIENT_URL } from '../utils/config';
@@ -21,6 +22,10 @@ router.get(
     }),
     completeOAuth
 );
+
+router.post('/login', callPassportLocal, returnUserToClient);
+
+router.post('/register', userRegister);
 
 router.get('/user', callPassportJwt, returnUserToClient);
 
