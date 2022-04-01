@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import passport from 'passport';
 
 import authRouter from './routes/auth';
 import locationRouter from './routes/location';
@@ -14,10 +15,17 @@ const app = express();
 
 const PORT = process.env.PORT || 4000;
 
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    optionsSuccessStatus: 200,
+};
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(cors());
+app.use(cors(corsOptions));
+app.use(passport.initialize());
 
 app.use(ROUTES.AUTH, authRouter);
 app.use(ROUTES.LOCATION, locationRouter);
