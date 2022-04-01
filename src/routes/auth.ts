@@ -1,9 +1,7 @@
 import { Router } from 'express';
 
-import { getTest } from '../controllers/test';
-
 const router = Router();
 
-router.get('/', getTest);
+// decide on auth strategy
 
 export default router;
