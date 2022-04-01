@@ -6,6 +6,81 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Provider {
+  NONE
+  GOOGLE
+  FACEBOOK
+  APPLE
+}
+
+model User {
+  id        Int                @id @default(autoincrement())
+  email     String?            @unique
+  username  String             @unique
+  password  String?
+  oAuthId   String?            @unique
+  provider  Provider           @default(NONE)
+  role      Role               @default(USER)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  profile   Profile[]
+  rating    Rating[]
+  locations locationsOnUsers[]
+}
+
+model Profile {
+  id           Int      @id @default(autoincrement())
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
+  profileImage String?
+  bio          String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Rating {
+  id        Int                  @id @default(autoincrement())
+  rating    Int
+  user      User                 @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  locations RatingsOnLocations[]
+}
+
+model Location {
+  id        Int                  @id @default(autoincrement())
+  name      String
+  longitude String
+  latitude  String
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  ratings   RatingsOnLocations[]
+  users     locationsOnUsers[]
+}
+
+model RatingsOnLocations {
+  id         Int      @id @default(autoincrement())
+  location   Location @relation(fields: [locationId], references: [id])
+  locationId Int
+  rating     Rating   @relation(fields: [ratingId], references: [id])
+  ratingId   Int
+}
+
+model locationsOnUsers {
+  id         Int      @id @default(autoincrement())
+  location   Location @relation(fields: [locationId], references: [id])
+  locationId Int
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
 }
