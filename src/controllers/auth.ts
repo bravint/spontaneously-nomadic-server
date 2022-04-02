@@ -23,9 +23,9 @@ export const completeOAuth = (req: Request, res: Response) => {
 
     const token: string = createToken({ id: user.id });
 
-    res.cookie('token', token, { httpOnly: true });
+    res.cookie('token', token, { httpOnly: true, maxAge: 1000*60 });
 
-    res.redirect(CLIENT_URL.ROOT);
+    res.redirect('http://localhost:3000/success');
 };
 
 export const returnUserToClient = async (req: Request, res: Response) => {

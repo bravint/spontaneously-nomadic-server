@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import passport from 'passport';
+import cookieParser from 'cookie-parser';
 
 import authRouter from './routes/auth';
 import locationRouter from './routes/location';
@@ -23,8 +24,10 @@ const corsOptions = {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan('dev'));
+
+app.use(cookieParser());
 app.use(cors(corsOptions));
+app.use(morgan('dev'));
 app.use(passport.initialize());
 
 app.use(ROUTES.AUTH, authRouter);
