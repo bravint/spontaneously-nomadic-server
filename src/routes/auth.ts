@@ -8,6 +8,7 @@ import { callPassportJwt } from '../utils/passport/middleware/jwt';
 import { CLIENT_URL } from '../utils/config';
 
 import '../utils/passport/strategy/google';
+import '../utils/passport/strategy/local';
 import '../utils/passport/strategy/jwt';
 
 const router = Router();
