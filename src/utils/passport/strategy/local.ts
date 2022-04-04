@@ -6,14 +6,15 @@ import { checkPassword } from '../../../utils/bcrypt';
 
 const options = {
     session: false,
+    usernameField: 'email' 
 };
 
 const localLogin = new LocalStrategy(
     options,
-    async (username, password, callback) => {
+    async (email, password, callback) => {
         const selectedUser: any = await prisma.user.findUnique({
             where: {
-                username: username,
+                email: email,
             },
         });
 

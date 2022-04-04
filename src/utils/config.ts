@@ -9,6 +9,7 @@ export const SESSION_NAME = 'session' as string;
 export const CLIENT_URL = {
     ROOT: 'http://localhost:3000' as string,
     LOGIN: 'http://localhost:3000/login' as string,
+    SUCCESS: 'http://localhost:3000/success' as string,
 };
 
 export const SERVER_MESSAGES = {
@@ -25,4 +26,8 @@ export const ROUTES = {
 
 export const AUTH_PROVIDER = {
     GOOGLE: 'GOOGLE' as any,
+};
+
+export const COOKIE_NAME = {
+    TOKEN: 'token' as string,
 };

@@ -23,18 +23,18 @@ enum Provider {
 }
 
 model User {
-  id        Int                @id @default(autoincrement())
-  email     String             @unique
-  username  String?            @unique
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  username  String?    @unique
   password  String?
-  oAuthId   String?            @unique
-  provider  Provider           @default(NONE)
-  role      Role               @default(USER)
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt
+  oAuthId   String?    @unique
+  provider  Provider   @default(NONE)
+  role      Role       @default(USER)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   profile   Profile[]
   rating    Rating[]
-  locations locationsOnUsers[]
+  location  Location[]
 }
 
 model Profile {
@@ -59,20 +59,13 @@ model Rating {
 }
 
 model Location {
-  id        Int                @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
   lng       Float
   lat       Float
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   rating    Rating[]
-  users     locationsOnUsers[]
-}
-
-model locationsOnUsers {
-  id         Int      @id @default(autoincrement())
-  location   Location @relation(fields: [locationId], references: [id])
-  locationId Int
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
 }

@@ -4,7 +4,7 @@ import { createToken } from '../utils/jsonwebtoken';
 import { prisma } from '../utils/prisma';
 import { hashPassword } from '../utils/bcrypt';
 
-import { CLIENT_URL } from '../utils/config';
+import { CLIENT_URL, COOKIE_NAME } from '../utils/config';
 import { IUserFromDatabase, ISanitisedUser } from '../utils/types';
 
 const sanitiseUser = (user: IUserFromDatabase) => {
@@ -23,9 +23,9 @@ export const completeOAuth = (req: Request, res: Response) => {
 
     const token: string = createToken({ id: user.id });
 
-    res.cookie('token', token, { httpOnly: true, maxAge: 1000*60 });
+    res.cookie(COOKIE_NAME.TOKEN, token, { httpOnly: true, maxAge: 1000*60 });
 
-    res.redirect('http://localhost:3000/success');
+    res.redirect(CLIENT_URL.SUCCESS);
 };
 
 export const returnUserToClient = async (req: Request, res: Response) => {
