@@ -7,7 +7,7 @@ export const createProfile = async (req: Request, res: Response) => {
 
     const createdProfile = await prisma.profile.create({
         data: {
-            userId: userId,
+            userId: Number(userId),
             profileImage: profileImage,
             bio: bio
         },

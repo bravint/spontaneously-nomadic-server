@@ -10,11 +10,13 @@ export interface IUserFromDatabase {
     role: string;
     updatedAt: Date;
     username: string | null;
+    profile: any
 }
 
 export interface ISanitisedUser {
-    email: string | null;
-    id: number;
+    id: number,
+    email: string | null;  
     role: string;
     username: string | null;
+    profileImage: string | null;
 }

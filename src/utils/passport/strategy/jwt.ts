@@ -26,6 +26,9 @@ const jwt = new JwtStrategy(options, async (payload, callback) => {
             where: {
                 id: Number(payload.id),
             },
+            include: {
+                profile: true,
+            }
         });
 
         if (!selectedUser) {

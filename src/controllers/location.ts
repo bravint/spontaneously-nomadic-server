@@ -12,11 +12,11 @@ export const createLocation = async (req: Request, res: Response) => {
             name: name,
             lng: lng,
             lat: lat,
-            userId: user.id,
+            userId: Number(user.id),
             rating: {
                 create: {
                     ratings: rating,
-                    userId: user.id,
+                    userId: Number(user.id),
                 },
             },
         },
@@ -37,7 +37,7 @@ export const getLocationsByUser = async (req: Request, res: Response) => {
 
     const selectedLocations = await prisma.location.findMany({
         where: {
-            userId: user.id,
+            userId: Number(user.id),
         },
         include: {
             rating: true,

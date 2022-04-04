@@ -18,12 +18,14 @@ const options = {
 
 const googleLogin = new GoogleStrategy(
     options,
-    async (accessToken, refreshToken, profile: any, done) => {
-        console.log('googleProfile', profile)
+    async (_: any, __: any, profile: any, done) => {
         try {
             const selectedUser = await prisma.user.findUnique({
                 where: {
                     oAuthId: profile.id,
+                },
+                include: {
+                    profile: true,
                 },
             });
 
@@ -39,10 +41,19 @@ const googleLogin = new GoogleStrategy(
                 data: {
                     oAuthId: profile.id,
                     provider: AUTH_PROVIDER.GOOGLE,
-                    username: profile.name.givenName,
                     email: profile.emails?.[0].value,
+                    profile: {
+                        create: {
+                            username: profile.name.givenName,
+                            profileImage: profile.photos?.[0].value,
+                        },
+                    },
+                },
+                include: {
+                    profile: true,
                 },
             });
+
             return done(null, createdUser);
         } catch (error) {
             console.log(error);

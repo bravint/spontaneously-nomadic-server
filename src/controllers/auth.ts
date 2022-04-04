@@ -10,10 +10,12 @@ import { IUserFromDatabase, ISanitisedUser } from '../utils/types';
 const sanitiseUser = (user: IUserFromDatabase) => {
     const sanitisedUser: ISanitisedUser = {
         id: user.id,
-        username: user.username,
-        role: user.role,
         email: user.email,
+        role: user.role,
+        username: user.profile[0].username,
+        profileImage: user.profile[0].profileImage,
     };
+        
 
     return sanitisedUser;
 };
@@ -23,7 +25,7 @@ export const completeOAuth = (req: Request, res: Response) => {
 
     const token: string = createToken({ id: user.id });
 
-    res.cookie(COOKIE_NAME.TOKEN, token, { httpOnly: true, maxAge: 1000*60 });
+    res.cookie(COOKIE_NAME.TOKEN, token, { httpOnly: true, maxAge: 1000 * 60 });
 
     res.redirect(CLIENT_URL.SUCCESS);
 };
@@ -31,7 +33,7 @@ export const completeOAuth = (req: Request, res: Response) => {
 export const returnUserToClient = async (req: Request, res: Response) => {
     const { user }: any = req;
 
-    const sanitisedUser: ISanitisedUser = sanitiseUser(user);
+    const sanitisedUser = sanitiseUser(user);
 
     const token: string = createToken({ id: sanitisedUser.id });
 
@@ -39,19 +41,27 @@ export const returnUserToClient = async (req: Request, res: Response) => {
 };
 
 export const userRegister = async (req: Request, res: Response) => {
-    const { username, password, email } = req.body;
+    const { password, email, username, profileImage } = req.body;
 
     const hashedPassword = await hashPassword(password);
 
-    let createdUser: IUserFromDatabase = await prisma.user.create({
+    let createdUser: any = await prisma.user.create({
         data: {
-            username: username,
             password: hashedPassword,
             email: email,
+            profile: {
+                create: {
+                    username: username,
+                    profileImage: profileImage,
+                },
+            },
+        },
+        include: {
+            profile: true,
         },
     });
 
-    const sanitisedUser: ISanitisedUser = sanitiseUser(createdUser);
+    const sanitisedUser = sanitiseUser(createdUser);
 
     const token: string = createToken({ id: sanitisedUser.id });
 
