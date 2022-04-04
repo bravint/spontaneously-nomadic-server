@@ -3,14 +3,27 @@ import { Request, Response } from 'express';
 import { prisma } from '../utils/prisma';
 
 export const createLocation = async (req: Request, res: Response) => {
-    const { name, longitude, latitude } = req.body;
+    const { name, lng, lat, rating } = req.body;
+
+    const { user }: any = req;
+
+    console.log(req.user);
 
     const createdLocation = await prisma.location.create({
         data: {
             name: name,
-            longitude: longitude,
-            latitude: latitude,
+            lng: lng,
+            lat: lat,
+            rating: {
+                create: {
+                    ratings: rating,
+                    userId: user.id,
+                },
+            },
         },
+        include: {
+            rating: true
+        }
     });
 
     res.status(200).json({ data: createdLocation });
@@ -30,10 +43,9 @@ export const getLocationsByUser = async (req: Request, res: Response) => {
             },
         },
         include: {
-            ratings: true,
+            rating: true,
         },
     });
 
     res.status(200).json({ data: selectedLocations });
 };
-

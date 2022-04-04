@@ -7,8 +7,9 @@ export const createRating = async (req: Request, res: Response) => {
 
     const createdRating = await prisma.rating.create({
         data: {
-            rating: rating,
+            ratings: rating,
             userId: userId,
+            locationId: locationId
         },
     });
 
@@ -20,13 +21,7 @@ export const getRatingsByLocation = async (req: Request, res: Response) => {
 
     const fetchedRatings = await prisma.rating.findMany({
         where: {
-            locations: {
-                some: {
-                    location: {
-                        id: Number(id),
-                    },
-                },
-            },
+            locationId: id
         },
     });
 

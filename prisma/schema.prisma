@@ -20,13 +20,12 @@ enum Provider {
   NONE
   GOOGLE
   FACEBOOK
-  APPLE
 }
 
 model User {
   id        Int                @id @default(autoincrement())
-  email     String?            @unique
-  username  String             @unique
+  email     String             @unique
+  username  String?            @unique
   password  String?
   oAuthId   String?            @unique
   provider  Provider           @default(NONE)
@@ -49,32 +48,25 @@ model Profile {
 }
 
 model Rating {
-  id        Int                  @id @default(autoincrement())
-  rating    Int
-  user      User                 @relation(fields: [userId], references: [id])
-  userId    Int
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
-  locations RatingsOnLocations[]
+  id         Int      @id @default(autoincrement())
+  ratings    Int
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  location   Location @relation(fields: [locationId], references: [id])
+  locationId Int
 }
 
 model Location {
-  id        Int                  @id @default(autoincrement())
+  id        Int                @id @default(autoincrement())
   name      String
-  longitude String
-  latitude  String
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
-  ratings   RatingsOnLocations[]
+  lng       Float
+  lat       Float
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  rating    Rating[]
   users     locationsOnUsers[]
-}
-
-model RatingsOnLocations {
-  id         Int      @id @default(autoincrement())
-  location   Location @relation(fields: [locationId], references: [id])
-  locationId Int
-  rating     Rating   @relation(fields: [ratingId], references: [id])
-  ratingId   Int
 }
 
 model locationsOnUsers {

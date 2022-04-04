@@ -2,19 +2,19 @@ export interface googleProfile {}
 
 export interface IUserFromDatabase {
     createdAt: Date;
-    email: string | null;
+    email: string;
     id: number;
     oAuthId: string | null;
     password: string | null;
     provider: string | null;
     role: string;
     updatedAt: Date;
-    username: string;
+    username: string | null;
 }
 
 export interface ISanitisedUser {
     email: string | null;
     id: number;
     role: string;
-    username: string;
+    username: string | null;
 }

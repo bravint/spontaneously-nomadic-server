@@ -1,11 +1,14 @@
 import { Router } from 'express';
 
 import { createProfile, getProfile } from '../controllers/profile';
+import { callPassportJwt } from '../utils/passport/middleware/jwt';
+
+import '../utils/passport/strategy/jwt';
 
 const router = Router();
 
-router.post('/', createProfile);
+router.post('/',callPassportJwt, createProfile);
 
-router.get('/', getProfile);
+router.get('/',callPassportJwt, getProfile);
 
 export default router;
