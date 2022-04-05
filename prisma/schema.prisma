@@ -23,17 +23,19 @@ enum Provider {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  email     String     @unique
-  password  String?
-  oAuthId   String?    @unique
-  provider  Provider   @default(NONE)
-  role      Role       @default(USER)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  profile   Profile[]
-  rating    Rating[]
-  location  Location[]
+  id         Int        @id @default(autoincrement())
+  email      String     @unique
+  password   String?
+  oAuthId    String?    @unique
+  provider   Provider   @default(NONE)
+  role       Role       @default(USER)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  profile    Profile[]
+  rating     Rating[]
+  location   Location[]
+  followedBy User[]     @relation("UserFollows", references: [id])
+  following  User[]     @relation("UserFollows", references: [id])
 }
 
 model Profile {

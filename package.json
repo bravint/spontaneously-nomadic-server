@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "Express server for spontaneous-nomad-client",
     "main": "dist/index.js",
+    "prisma": {
+        "seed": "ts-node prisma/seed.ts"
+      },
     "scripts": {
         "build": "tsc",
         "dev": "nodemon --exec ts-node src/index.ts",
@@ -26,6 +29,7 @@
         "passport-local": "^1.0.0"
     },
     "devDependencies": {
+        "@faker-js/faker": "^6.1.2",
         "@types/bcrypt": "^5.0.0",
         "@types/cookie-parser": "^1.4.2",
         "@types/cors": "^2.8.12",
