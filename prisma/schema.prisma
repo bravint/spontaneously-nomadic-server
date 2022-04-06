@@ -34,8 +34,8 @@ model User {
   profile    Profile[]
   rating     Rating[]
   location   Location[]
-  followedBy User[]     @relation("UserFollows", references: [id])
-  following  User[]     @relation("UserFollows", references: [id])
+  followedBy User[]     @relation("Follows", references: [id])
+  following  User[]     @relation("Follows", references: [id])
 }
 
 model Profile {

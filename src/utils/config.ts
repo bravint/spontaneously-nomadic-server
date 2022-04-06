@@ -19,6 +19,7 @@ export const SERVER_MESSAGES = {
 
 export const ROUTES = {
     AUTH: '/auth' as string,
+    FOLLOW: '/follow' as string,
     LOCATION: '/location' as string,
     RATING: '/rating' as string,
     PROFILE: '/profile' as string,

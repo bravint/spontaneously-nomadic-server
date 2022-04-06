@@ -10,8 +10,6 @@ import { IUserFromDatabase, ISanitisedUser } from '../utils/types';
 const sanitiseUser = (user: IUserFromDatabase) => {
     const sanitisedUser: ISanitisedUser = {
         id: user.id,
-        email: user.email,
-        role: user.role,
         username: user.profile[0].username,
         profileImage: user.profile[0].profileImage,
     };

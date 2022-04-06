@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { mainModule } from 'process';
 
 import { locations } from './locations';
 
@@ -23,6 +24,22 @@ export const fakeUser = () => {
     };
 
     return fakeUser;
+};
+
+export const testUser = () => {
+    const email: string = 'test@mail.com';
+    const password: string = 'password';
+    const username: string = 'Test';
+    const profileImage: string = faker.image.avatar();
+
+    const testUser = {
+        email: email,
+        password: password,
+        username: username,
+        profileImage: profileImage,
+    };
+
+    return testUser;
 };
 
 export const fakeLocation = () => {

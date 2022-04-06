@@ -1,9 +1,10 @@
 import { prisma } from '../src/utils/prisma';
 import {
     fakeUser,
+    testUser,
     fakeLocation,
     genRandomNumberInRange,
-} from '../src/utils/fakerjs';
+} from '../src/utils/seed';
 
 const USERS_TO_CREATE = 20;
 const LOCATIONS_PER_USER = 20;
@@ -12,7 +13,9 @@ const FOLLOWERS_PER_USER = 10;
 const seedDatabase = async () => {
     try {
         for (let i = 0; i < USERS_TO_CREATE; i++) {
-            const newUser: any = fakeUser();
+            let newUser;
+
+            i === 0 ? (newUser = testUser()) : (newUser = fakeUser());
 
             const { password, email, username, profileImage } = newUser;
 
@@ -66,14 +69,12 @@ const seedDatabase = async () => {
 
                 const generatedId = genRandomNumberInRange(1, 20);
 
-                const userId = i+1
+                const userId = i + 1;
 
                 if (!idStore.includes(generatedId) && generatedId !== i) {
                     idStore.push(generatedId);
 
-                console.log(generatedId, i)
-
-                    await prisma.user.update({
+                    const createdFollow = await prisma.user.update({
                         where: {
                             id: userId,
                         },
@@ -81,12 +82,14 @@ const seedDatabase = async () => {
                             followedBy: {
                                 connect: {
                                     id: generatedId,
-                                }
-                            }
-                        }
+                                },
+                            },
+                        },
                     });
 
-                    await prisma.user.update({
+                    console.log('createdFollow', createdFollow);
+
+                    const createdFollower = await prisma.user.update({
                         where: {
                             id: generatedId,
                         },
@@ -94,10 +97,12 @@ const seedDatabase = async () => {
                             following: {
                                 connect: {
                                     id: userId,
-                                }
-                            }
-                        }
+                                },
+                            },
+                        },
                     });
+
+                    console.log('createdFollower', createdFollower);
                 } else {
                     j--;
                 }

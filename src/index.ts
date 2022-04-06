@@ -6,6 +6,7 @@ import passport from 'passport';
 import cookieParser from 'cookie-parser';
 
 import authRouter from './routes/auth';
+import followRouter from './routes/follow';
 import locationRouter from './routes/location';
 import ratingRouter from './routes/rating';
 import profileRouter from './routes/profile';
@@ -34,6 +35,7 @@ app.use(ROUTES.AUTH, authRouter);
 app.use(ROUTES.LOCATION, locationRouter);
 app.use(ROUTES.RATING, ratingRouter);
 app.use(ROUTES.PROFILE, profileRouter);
+app.use(ROUTES.FOLLOW, followRouter);
 
 app.get('*', (req, res) => {
     res.send(SERVER_MESSAGES.HELLO);
