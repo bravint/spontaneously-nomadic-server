@@ -7,7 +7,7 @@ export const genRandomNumberInRange = (min: number, max: number) =>
 
 const generateRandomLocation = () => genRandomNumberInRange(0, 244);
 
-const generateRandomRating = () => genRandomNumberInRange(1, 6);
+const generateRandomRating = () => genRandomNumberInRange(1, 5);
 
 export const fakeUser = () => {
     const email: string = faker.internet.email();
@@ -33,7 +33,7 @@ export const fakeLocation = () => {
         name: location.name,
         lat: Number(location.lat),
         lng: Number(location.lng),
-        rating: rating,
+        rating: rating * 20,
     };
 
     return fakeLocation;
