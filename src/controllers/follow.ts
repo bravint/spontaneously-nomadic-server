@@ -40,12 +40,14 @@ export const createFollow = async (req: Request, res: Response) => {
 export const getFollowingByUser = async (req: Request, res: Response) => {
     const { user }: any = req;
 
+    console.log(user, user.id)
+
     const selectedFollowers = await prisma.user.findMany({
         where: {
             id: user.id,
         },
         include: {
-            following: {
+            followedBy: {
                 include: {
                     profile: true,
                 },
@@ -53,7 +55,7 @@ export const getFollowingByUser = async (req: Request, res: Response) => {
         },
     });
 
-    const { following } = selectedFollowers[0];
+    const { followedBy } = selectedFollowers[0];
 
     const sanitiseUser = (user: IUserFromDatabase) => {
         const sanitisedUser: ISanitisedUser = {
@@ -65,7 +67,7 @@ export const getFollowingByUser = async (req: Request, res: Response) => {
         return sanitisedUser;
     };
 
-    const sanitisedFollowers = following.map((follow) => sanitiseUser(follow));
+    const sanitisedFollowers = followedBy.map((followed) => sanitiseUser(followed));
 
     res.status(200).json({ data: sanitisedFollowers });
 };
