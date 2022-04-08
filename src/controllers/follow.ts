@@ -40,8 +40,6 @@ export const createFollow = async (req: Request, res: Response) => {
 export const getFollowingByUser = async (req: Request, res: Response) => {
     const { user }: any = req;
 
-    console.log(user, user.id)
-
     const selectedFollowers = await prisma.user.findMany({
         where: {
             id: user.id,
@@ -67,9 +65,32 @@ export const getFollowingByUser = async (req: Request, res: Response) => {
         return sanitisedUser;
     };
 
-    const sanitisedFollowers = followedBy.map((followed) => sanitiseUser(followed));
+    const sanitisedFollowers = followedBy.map((followed) =>
+        sanitiseUser(followed)
+    );
 
     res.status(200).json({ data: sanitisedFollowers });
 };
 
-export const deleteFollow = (req: Request, res: Response) => {};
+export const deleteFollow = async (req: Request, res: Response) => {
+    const { user }: any = req;
+
+    const { id } : any = req.params;
+
+    const deletedFollow = await prisma.user.update({
+        where: {
+            id: user.id,
+        },
+        data: {
+            followedBy: {
+                disconnect: {
+                    id: Number(id),
+                },
+            },
+        },
+    });
+
+    console.log(id, deletedFollow)
+
+    res.status(200).json({ data: deletedFollow });
+};

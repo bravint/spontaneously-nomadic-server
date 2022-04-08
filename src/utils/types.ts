@@ -1,5 +1,3 @@
-export interface googleProfile {}
-
 export interface IUserFromDatabase {
     createdAt: Date;
     email: string;

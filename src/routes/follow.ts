@@ -11,6 +11,6 @@ router.get('/',callPassportJwt, getFollowingByUser);
 
 router.post('/',callPassportJwt, createFollow);
 
-router.delete('/',callPassportJwt, deleteFollow);
+router.delete('/:id',callPassportJwt, deleteFollow);
 
 export default router;

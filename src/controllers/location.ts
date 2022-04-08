@@ -32,12 +32,27 @@ export const createLocation = async (req: Request, res: Response) => {
     res.status(200).json({ data: createdLocation });
 };
 
-export const getLocationsByUser = async (req: Request, res: Response) => {
+export const getLocations = async (req: Request, res: Response) => {
     const { user }: any = req;
 
     const selectedLocations = await prisma.location.findMany({
         where: {
             userId: Number(user.id),
+        },
+        include: {
+            rating: true,
+        },
+    });
+
+    res.status(200).json({ data: selectedLocations });
+};
+
+export const getLocationsByUser = async (req: Request, res: Response) => {
+    const { id }: any = req.params;
+
+    const selectedLocations = await prisma.location.findMany({
+        where: {
+            userId: Number(id),
         },
         include: {
             rating: true,
