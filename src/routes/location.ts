@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { createLocation, getLocations, getLocationsByUser, editLocation, deleteLocation } from '../controllers/location';
-import { callPassportJwt } from '../utils/passport/middleware/jwt';
+import { callPassportJwt } from '../utils/middleware/jwt';
 
 import '../utils/passport/strategy/jwt';
 
