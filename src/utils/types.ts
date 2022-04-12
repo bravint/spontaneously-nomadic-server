@@ -14,4 +14,5 @@ export interface ISanitisedUser {
     id: number,
     username: string | null;
     profileImage: string | null;
+    bio:  string | null;
 }

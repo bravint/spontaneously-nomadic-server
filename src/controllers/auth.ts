@@ -12,6 +12,7 @@ const sanitiseUser = (user: IUserFromDatabase) => {
         id: user.id,
         username: user.profile[0].username,
         profileImage: user.profile[0].profileImage,
+        bio: user.profile[0].bio,
     };
 
     return sanitisedUser;
