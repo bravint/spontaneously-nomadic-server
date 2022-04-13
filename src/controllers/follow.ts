@@ -60,6 +60,7 @@ export const getFollowingByUser = async (req: Request, res: Response) => {
             id: user.id,
             username: user.profile[0].username,
             profileImage: user.profile[0].profileImage,
+            bio: user.profile[0].bio,
         };
 
         return sanitisedUser;
@@ -89,8 +90,6 @@ export const deleteFollow = async (req: Request, res: Response) => {
             },
         },
     });
-
-    console.log(id, deletedFollow)
 
     res.status(200).json({ data: deletedFollow });
 };
