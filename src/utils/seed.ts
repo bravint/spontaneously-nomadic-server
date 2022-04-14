@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker';
-import { mainModule } from 'process';
 
 import { locations } from './locations';
 
