@@ -3,6 +3,17 @@ import { Request, Response } from 'express';
 import { prisma } from '../utils/prisma';
 import { IUserFromDatabase, ISanitisedUser } from '../utils/types';
 
+const sanitiseUser = (user: IUserFromDatabase): ISanitisedUser => {
+    const sanitisedUser = {
+        id: user.id,
+        username: user.profile[0].username,
+        profileImage: user.profile[0].profileImage,
+        bio: user.profile[0].bio,
+    };
+
+    return sanitisedUser;
+};
+
 export const createFollow = async (req: Request, res: Response) => {
     const { user }: any = req;
 
@@ -32,9 +43,14 @@ export const createFollow = async (req: Request, res: Response) => {
                 },
             },
         },
+        include: {
+            profile: true,
+        },
     });
 
-    res.status(200).json({ data: createdFollower });
+    const sanitisedFollower = sanitiseUser(createdFollower);
+
+    res.status(200).json({ data: sanitisedFollower });
 };
 
 export const getFollowingByUser = async (req: Request, res: Response) => {
@@ -55,30 +71,17 @@ export const getFollowingByUser = async (req: Request, res: Response) => {
 
     const { followedBy } = selectedFollowers[0];
 
-    const sanitiseUser = (user: IUserFromDatabase) => {
-        const sanitisedUser: ISanitisedUser = {
-            id: user.id,
-            username: user.profile[0].username,
-            profileImage: user.profile[0].profileImage,
-            bio: user.profile[0].bio,
-        };
-
-        return sanitisedUser;
-    };
-
-    const sanitisedFollowers = followedBy.map((followed) =>
-        sanitiseUser(followed)
-    );
+    const sanitisedFollowers = followedBy.map((user) => sanitiseUser(user));
 
     res.status(200).json({ data: sanitisedFollowers });
 };
 
-export const deleteFollow = async (req: Request, res: Response) => {
+export const deleteFollower = async (req: Request, res: Response) => {
     const { user }: any = req;
 
-    const { id } : any = req.params;
+    const { id }: any = req.params;
 
-    const deletedFollow = await prisma.user.update({
+    const deletedFollower = await prisma.user.update({
         where: {
             id: user.id,
         },
@@ -89,7 +92,12 @@ export const deleteFollow = async (req: Request, res: Response) => {
                 },
             },
         },
+        include: {
+            profile: true,
+        },
     });
 
-    res.status(200).json({ data: deletedFollow });
+    const sanitisedFollower = sanitiseUser(deletedFollower);
+
+    res.status(200).json({ data: sanitisedFollower });
 };

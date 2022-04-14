@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { createFollow, deleteFollow, getFollowingByUser } from '../controllers/follow';
+import { createFollow, deleteFollower, getFollowingByUser } from '../controllers/follow';
 import { callPassportJwt } from '../utils/middleware/jwt';
 
 import '../utils/passport/strategy/jwt';
@@ -11,6 +11,6 @@ router.get('/',callPassportJwt, getFollowingByUser);
 
 router.post('/',callPassportJwt, createFollow);
 
-router.delete('/:id',callPassportJwt, deleteFollow);
+router.delete('/:id',callPassportJwt, deleteFollower);
 
 export default router;
