@@ -1,3 +1,5 @@
+//locations imported from https://github.com/google/dspl/blob/master/samples/google/canonical/countries.csv
+
 export const locations = [
     { name: 'Andorra', lat: '42.546245', lng: '1.601554' },
     { name: 'United Arab Emirates', lat: '23.424076', lng: '53.847818' },
