@@ -2,6 +2,20 @@ import { Request, Response } from 'express';
 
 import { prisma } from '../utils/prisma';
 
+const sanitiseLocation = (location: ILocationFromDatabase) : ISanitisedLocation => {
+    const sanitisedLocation : ISanitisedLocation = {
+        id: location.id,
+        name: location.name,
+        lng: location.lng,
+        lat: location.lat,
+        userId: location.userId,
+        rating: location.rating[0].ratings,
+        ratingId: location.rating[0].id,
+    };
+
+    return sanitisedLocation;
+};
+
 export const createLocation = async (req: Request, res: Response) => {
     const { name, lng, lat, rating } = req.body;
 
@@ -44,7 +58,11 @@ export const getLocations = async (req: Request, res: Response) => {
         },
     });
 
-    res.status(200).json({ data: selectedLocations });
+    const sanitisedLocations = selectedLocations.map((location) =>
+        sanitiseLocation(location)
+    );
+
+    res.status(200).json({ data: sanitisedLocations });
 };
 
 export const getLocationsByUser = async (req: Request, res: Response) => {
@@ -59,7 +77,11 @@ export const getLocationsByUser = async (req: Request, res: Response) => {
         },
     });
 
-    res.status(200).json({ data: selectedLocations });
+    const sanitisedLocations = selectedLocations.map((location) =>
+        sanitiseLocation(location)
+    );
+
+    res.status(200).json({ data: sanitisedLocations });
 };
 
 export const editLocation = async (req: Request, res: Response) => {
@@ -68,8 +90,6 @@ export const editLocation = async (req: Request, res: Response) => {
     const { id }: any = req.params;
 
     const { name, lng, lat, rating, ratingId } = req.body;
-
-    console.log(name, lng, lat, rating);
 
     const editedLocation = await prisma.location.update({
         where: {
@@ -97,9 +117,9 @@ export const editLocation = async (req: Request, res: Response) => {
         },
     });
 
-    console.log('editedLocation', editedLocation);
+    const sanitisedLocation = sanitiseLocation(editedLocation);
 
-    res.status(201).json({ data: editedLocation });
+    res.status(201).json({ data: sanitisedLocation });
 };
 
 export const deleteLocation = async (req: Request, res: Response) => {
@@ -109,7 +129,42 @@ export const deleteLocation = async (req: Request, res: Response) => {
         where: {
             id: Number(id),
         },
+        include: {
+            rating: true,
+        },
     });
 
-    res.status(201).json({ data: deletedLocation });
+    const sanitisedLocation = sanitiseLocation(deletedLocation);
+
+    res.status(201).json({ data: sanitisedLocation });
 };
+
+interface ILocationFromDatabase {
+    id: number;
+    name: string;
+    lng: number;
+    lat: number;
+    userId: number | null;
+    rating: Array<IRatingFromDatabase>;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+interface IRatingFromDatabase {
+    id: number;
+    ratings: number;
+    userId: number;
+    locationId: number;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+interface ISanitisedLocation {
+    id: number;
+    name: string;
+    lng: number;
+    lat: number;
+    userId: number | null;
+    rating: number;
+    ratingId: number;
+}
