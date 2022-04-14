@@ -77,9 +77,7 @@ export const getLocationsByUser = async (req: Request, res: Response) => {
         },
     });
 
-    const sanitisedLocations = selectedLocations.map((location) =>
-        sanitiseLocation(location)
-    );
+    const sanitisedLocations = selectedLocations.map((location) => sanitiseLocation(location));
 
     res.status(200).json({ data: sanitisedLocations });
 };

@@ -2,8 +2,9 @@ import passport from 'passport';
 import { Request } from 'express';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 
-import { prisma } from '../../../utils/prisma';
-import { SECRET } from '../../../utils/config';
+import { prisma } from '../../prisma';
+import { SECRET } from '../../config';
+import { IUserFromDatabase } from '../../types';
 
 const cookieExtractor = (req: Request) => {
     let jwt: string = '';
@@ -22,7 +23,7 @@ const options = {
 
 const jwt = new JwtStrategy(options, async (payload, callback) => {
     try {
-        const selectedUser = await prisma.user.findUnique({
+        const selectedUser : IUserFromDatabase | null = await prisma.user.findUnique({
             where: {
                 id: Number(payload.id),
             },
