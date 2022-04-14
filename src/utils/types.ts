@@ -5,7 +5,16 @@ export interface IUserFromDatabase {
     password: string | null;
     provider: string | null;
     role: string;
-    profile: any;
+    profile: Array<IProfileFromDatabase>;
+    createdAt: Date;
+    updatedAt: Date;
+}
+interface IProfileFromDatabase {
+    id: number;
+    userId: number;
+    username: string | null;
+    profileImage: string | null;
+    bio: string | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -46,3 +55,4 @@ export interface ISanitisedLocation {
     rating: number;
     ratingId: number;
 }
+
