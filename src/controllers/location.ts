@@ -2,8 +2,10 @@ import { Request, Response } from 'express';
 
 import { prisma } from '../utils/prisma';
 
-const sanitiseLocation = (location: ILocationFromDatabase) : ISanitisedLocation => {
-    const sanitisedLocation : ISanitisedLocation = {
+import { ILocationFromDatabase, ISanitisedLocation } from '../utils/types';
+
+const sanitiseLocation = (location: ILocationFromDatabase): ISanitisedLocation => {
+    const sanitisedLocation = {
         id: location.id,
         name: location.name,
         lng: location.lng,
@@ -58,9 +60,7 @@ export const getLocations = async (req: Request, res: Response) => {
         },
     });
 
-    const sanitisedLocations = selectedLocations.map((location) =>
-        sanitiseLocation(location)
-    );
+    const sanitisedLocations = selectedLocations.map((location) => sanitiseLocation(location));
 
     res.status(200).json({ data: sanitisedLocations });
 };
@@ -138,33 +138,3 @@ export const deleteLocation = async (req: Request, res: Response) => {
 
     res.status(201).json({ data: sanitisedLocation });
 };
-
-interface ILocationFromDatabase {
-    id: number;
-    name: string;
-    lng: number;
-    lat: number;
-    userId: number | null;
-    rating: Array<IRatingFromDatabase>;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-interface IRatingFromDatabase {
-    id: number;
-    ratings: number;
-    userId: number;
-    locationId: number;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-interface ISanitisedLocation {
-    id: number;
-    name: string;
-    lng: number;
-    lat: number;
-    userId: number | null;
-    rating: number;
-    ratingId: number;
-}
