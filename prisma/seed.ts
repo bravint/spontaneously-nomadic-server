@@ -1,14 +1,7 @@
 import { prisma } from '../src/utils/prisma';
-import {
-    fakeUser,
-    testUser,
-    fakeLocation,
-    genRandomNumberInRange,
-} from '../src/utils/seed';
+import { fakeUser, testUser, fakeLocation, genRandomNumberInRange } from '../src/utils/seed';
 
-const USERS_TO_CREATE = 20;
-const LOCATIONS_PER_USER = 20;
-const FOLLOWERS_PER_USER = 10;
+import { FOLLOWERS_PER_USER, LOCATIONS_PER_USER, USERS_TO_CREATE } from '../src/utils/config';
 
 const seedDatabase = async () => {
     try {
