@@ -8,7 +8,7 @@ import { registerSchema } from '../utils/joi';
 import { CLIENT_URL, COOKIE_NAME } from '../utils/config';
 import { IUserFromDatabase, ISanitisedUser } from '../utils/types';
 
-const sanitiseUser = (user: IUserFromDatabase) => {
+const sanitiseUser = (user: IUserFromDatabase) : ISanitisedUser =>  {
     const sanitisedUser: ISanitisedUser = {
         id: user.id,
         username: user.profile[0].username,
