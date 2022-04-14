@@ -43,7 +43,8 @@ export const userRegister = async (req: Request, res: Response) => {
     const { error } = registerSchema.validate(req.body);
 
     if (error) {
-        return res.status(400).json({ error: error.details[0] });
+        console.log(error);
+        return res.status(400).json({ error: error.details[0].message });
     }
 
     const { password, email, username, profileImage } = req.body;

@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../utils/prisma';
 
 import { ILocationFromDatabase, ISanitisedLocation } from '../utils/types';
+import { createLocationSchema, editLocationSchema } from '../utils/joi';
 
 const sanitiseLocation = (location: ILocationFromDatabase): ISanitisedLocation => {
     const sanitisedLocation = {
@@ -19,6 +20,13 @@ const sanitiseLocation = (location: ILocationFromDatabase): ISanitisedLocation =
 };
 
 export const createLocation = async (req: Request, res: Response) => {
+    const { error } = createLocationSchema.validate(req.body);
+
+    if (error) {
+        console.log(error);
+        return res.status(400).json({ error: error.details[0].message });
+    }
+
     const { name, lng, lat, rating } = req.body;
 
     const { user }: any = req;
@@ -45,7 +53,9 @@ export const createLocation = async (req: Request, res: Response) => {
         return res.sendStatus(500);
     }
 
-    res.status(200).json({ data: createdLocation });
+    const sanitisedLocation = sanitiseLocation(createdLocation);
+
+    res.status(200).json({ data: sanitisedLocation });
 };
 
 export const getLocations = async (req: Request, res: Response) => {
@@ -83,6 +93,13 @@ export const getLocationsByUser = async (req: Request, res: Response) => {
 };
 
 export const editLocation = async (req: Request, res: Response) => {
+    const { error } = editLocationSchema.validate(req.body);
+
+    if (error) {
+        console.log(error);
+        return res.status(400).json({ error: error.details[0].message });
+    }
+
     const { user }: any = req;
 
     const { id }: any = req.params;
