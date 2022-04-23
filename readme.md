@@ -2,7 +2,7 @@
 
 ## Introduction
 
-An express server providing backend functionality for https://github.com/bravint/spontaneously-nomadic-client.
+An express server providing back-end functionality for https://github.com/bravint/spontaneously-nomadic-client.
 
 Uses:
 
