@@ -4,13 +4,15 @@
 
 An express server providing back-end functionality for https://github.com/bravint/spontaneously-nomadic-client.
 
+**Uses: Node | Express | Prisma | PostgreSQL | TypeScript**
+
 I wanted this server to reflect everything I have learnt over the course of my 6 months at Boolean UK as well as to explore using TypeScript and third party npm packages - getting familar with reading documentation and looking for solutions to problems and bugs in GitHub issues are examples of the skills I improved upon as a result.
 
 ## Table of Contents
 
  - [Current Project Status](#Current-Project-Status)
  - [Upcoming Features](#Upcoming-Features)
- - [Stack Used](#Stack-Used)
+ - [Stack Used](#Technologies-Used)
  - [User Stories](#User-Stories)
  - [Database Structure](#Database-Structure)
  - [Install](#Install)
@@ -25,7 +27,7 @@ I wanted this server to reflect everything I have learnt over the course of my 6
 
 Add abilty to have friends / followers to the server and client**
 
-## Stack Used:
+## Technologies Used:
 
  - **Passport.js**, **bcrypt**, **jsonwebtoken** : handles user authentication
  - **Joi** : validate requests to the server
