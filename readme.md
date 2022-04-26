@@ -5,19 +5,33 @@
 An express server providing back-end functionality for https://github.com/bravint/spontaneously-nomadic-client.
 
 I wanted this server to reflect everything I have learnt over the course of my 6 months at Boolean UK as well as to explore using TypeScript and third party npm packages - getting familar with reading documentation, looking for solutions to problems and bugs in GitHub issues are examples of the skills I improved upon as a result.
+
+## Table of Contents
+
+ - [Current Project Status](#Current-Project-Status)
+ - [Upcoming features](#Upcoming-Features)
+ - [Stack Used](#Stack-Used)
+ - [User Stories](#User-Stories)
+ - [Database Structure](#Database-Structure)
+ - [Install](#Install)
+
 ## Current Project Status
 
 MVP completed : 2 week project with 3 day sprints
 
-*see upcoming features for next steps!*
+*see upcoming features to see where I will take this project next!*
+
+## Upcoming Features
+
+Add abilty to have friends / followers to the server and client**
 
 ## Stack Used:
 
-**Passport.js**, **bcrypt**, **jsonwebtoken** : handles user authentication\
-**Joi** : validate requests to the server\
-**Prisma** : ORM to abstract SQL database requests\
-**PostgreSQL** : database to store client data\
-**TypeScript** : add type-checking to JavaScript
+ - **Passport.js**, **bcrypt**, **jsonwebtoken** : handles user authentication\
+ - **Joi** : validate requests to the server\
+ - **Prisma** : ORM to abstract SQL database requests\
+ - **PostgreSQL** : database to store client data\
+ - **TypeScript** : add type-checking to JavaScript
 
 
 ## User Stories
@@ -40,7 +54,3 @@ Install dependencies: <code>npm install</code>\
 Start server: <code>npm run dev</code>
 
 *Optional*: Compile .ts files to /dist folder: <code>npm build</code>
-
-## Upcoming features
-
-Add abilty to have friends / followers to the server and client**
