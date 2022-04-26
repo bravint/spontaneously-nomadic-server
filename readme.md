@@ -4,7 +4,7 @@
 
 An express server providing back-end functionality for https://github.com/bravint/spontaneously-nomadic-client.
 
-I wanted this server to reflect everything I have learnt over the course of my 6 months at Boolean UK and to explore using typescript and third party npm packages - this includes getting familar with reading documentation, looking for solutions to problems and bugs in GitHub issues to name but a few.
+I wanted this server to reflect everything I have learnt over the course of my 6 months at Boolean UK as well as to explore using TypeScript and third party npm packages - getting familar with reading documentation, looking for solutions to problems and bugs in GitHub issues are examples of the skills I improved upon as a result.
 ## Current Project Status
 
 MVP completed : 2 week project with 3 day sprints
@@ -19,7 +19,20 @@ MVP completed : 2 week project with 3 day sprints
 **PostgreSQL** : database to store client data\
 **TypeScript** : add type-checking to JavaScript
 
-## Database 
+
+## User Stories
+
+ - As a user i should be able to place pins/markers on a map of the world to mark places I have been to\
+ - As a user I should be able to rate these places in order to track whether I like places\
+ - As a user I want to be able to add places I would like to visit in the future\
+ - As a user I should be able to create an account in order to save a list of places and my ratings\
+ - As a user I should be able to see ratings for places that other users have visited
+
+## Database Structure
+
+Prisma schema was derived from the following ERD:
+
+![ERD](./assets/erd.png)
 
 ## Install
 
