@@ -27,19 +27,19 @@ Add abilty to have friends / followers to the server and client**
 
 ## Stack Used:
 
- - **Passport.js**, **bcrypt**, **jsonwebtoken** : handles user authentication\
- - **Joi** : validate requests to the server\
- - **Prisma** : ORM to abstract SQL database requests\
- - **PostgreSQL** : database to store client data\
+ - **Passport.js**, **bcrypt**, **jsonwebtoken** : handles user authentication
+ - **Joi** : validate requests to the server
+ - **Prisma** : ORM to abstract SQL database requests
+ - **PostgreSQL** : database to store client data
  - **TypeScript** : add type-checking to JavaScript
 
 
 ## User Stories
 
- - As a user i should be able to place pins/markers on a map of the world to mark places I have been to\
- - As a user I should be able to rate these places in order to track whether I like places\
- - As a user I want to be able to add places I would like to visit in the future\
- - As a user I should be able to create an account in order to save a list of places and my ratings\
+ - As a user i should be able to place pins/markers on a map of the world to mark places I have been to
+ - As a user I should be able to rate these places in order to track whether I like places
+ - As a user I want to be able to add places I would like to visit in the future
+ - As a user I should be able to create an account in order to save a list of places and my ratings
  - As a user I should be able to see ratings for places that other users have visited
 
 ## Database Structure
