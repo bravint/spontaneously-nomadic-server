@@ -4,12 +4,12 @@
 
 An express server providing back-end functionality for https://github.com/bravint/spontaneously-nomadic-client.
 
-I wanted this server to reflect everything I have learnt over the course of my 6 months at Boolean UK as well as to explore using TypeScript and third party npm packages - getting familar with reading documentation, looking for solutions to problems and bugs in GitHub issues are examples of the skills I improved upon as a result.
+I wanted this server to reflect everything I have learnt over the course of my 6 months at Boolean UK as well as to explore using TypeScript and third party npm packages - getting familar with reading documentation and looking for solutions to problems and bugs in GitHub issues are examples of the skills I improved upon as a result.
 
 ## Table of Contents
 
  - [Current Project Status](#Current-Project-Status)
- - [Upcoming features](#Upcoming-Features)
+ - [Upcoming Features](#Upcoming-Features)
  - [Stack Used](#Stack-Used)
  - [User Stories](#User-Stories)
  - [Database Structure](#Database-Structure)
@@ -17,7 +17,7 @@ I wanted this server to reflect everything I have learnt over the course of my 6
 
 ## Current Project Status
 
-MVP completed : 2 week project with 3 day sprints
+**MVP completed** : 2 week project with 3 day sprints
 
 *see upcoming features to see where I will take this project next!*
 
