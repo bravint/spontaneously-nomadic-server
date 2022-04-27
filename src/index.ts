@@ -18,7 +18,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://spontaneously-nomadic-client.herokuapp.com'],
+    origin: ['http://localhost:3000', 'https://spontaneously-nomadic-client.herokuapp.com', 'spontaneously-nomadic-client.vercel.app'],
     credentials: true,
     optionsSuccessStatus: 200,
 };
