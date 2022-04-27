@@ -2,7 +2,7 @@ import passport from 'passport';
 import { Router } from 'express';
 
 import { returnUserToClient, completeOAuth, userRegister } from '../controllers/auth';
-import { verifyLogin } from '../utils/middleware/local';
+import { validateLoginRequest, callPassportLocal } from '../utils/middleware/local';
 import { callPassportJwt } from '../utils/middleware/jwt';
 
 import { CLIENT_URL } from '../utils/config';
@@ -24,7 +24,7 @@ router.get(
     completeOAuth
 );
 
-router.post('/login', verifyLogin, returnUserToClient);
+router.post('/login', validateLoginRequest, callPassportLocal, returnUserToClient);
 
 router.post('/register', userRegister);
 

@@ -24,7 +24,7 @@ const localLogin = new LocalStrategy(
         if (!selectedUser) {
             return callback('error');
         }
-
+        console.log(selectedUser)
         const checkedPassword = checkPassword(password, selectedUser.password);
 
         if (!checkedPassword) {

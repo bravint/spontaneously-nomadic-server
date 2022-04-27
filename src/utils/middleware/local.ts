@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { loginSchema } from '../joi';
 
-const validateLoginRequest = (req: Request, res: Response, next: NextFunction) => {
+export const validateLoginRequest = (req: Request, res: Response, next: NextFunction) => {
     const { error } = loginSchema.validate(req.body);
 
     if (error) {
@@ -11,9 +11,9 @@ const validateLoginRequest = (req: Request, res: Response, next: NextFunction) =
     }
 
     next();
-}
+};
 
-const callPassportLocal = (req: Request, res: Response, next: NextFunction) => {
+export const callPassportLocal = (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate('local', (err, user, info) => {
         if (err) {
             return next(err);
@@ -28,9 +28,3 @@ const callPassportLocal = (req: Request, res: Response, next: NextFunction) => {
         return next();
     })(req, res, next);
 };
-
-export const verifyLogin = (req: Request, res: Response, next: NextFunction) => {
-    validateLoginRequest;
-    callPassportLocal;
-    return next();
-}

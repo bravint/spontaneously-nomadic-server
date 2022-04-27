@@ -27,7 +27,7 @@ export const fakeUser = () => {
 
 export const testUser = () => {
     const email: string = 'test@mail.com';
-    const password: string = 'password';
+    const password: string = 'test';
     const username: string = 'Test';
     const profileImage: string = faker.image.avatar();
 
