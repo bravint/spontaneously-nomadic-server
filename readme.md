@@ -6,7 +6,7 @@ An express server providing back-end functionality for https://github.com/bravin
 
 **Uses: Node | Express | Prisma | PostgreSQL | TypeScript**
 
-I wanted this server to reflect everything I have learnt over the course of my 6 months at Boolean UK as well as to explore using TypeScript and third party npm packages - getting familar with reading documentation and looking for solutions to problems and bugs in GitHub issues are examples of the skills I improved upon as a result.
+I wanted this server to reflect everything I have learnt over the course of my 6 months at Boolean UK as well as to explore using TypeScript and third party npm packages - getting familar with parsing documentation and looking for solutions to problems and bugs I encountered.
 
 ## Table of Contents
 
@@ -34,7 +34,6 @@ Add abilty to have friends / followers to the server and client**
  - **Prisma** : ORM to abstract SQL database requests
  - **PostgreSQL** : database to store client data
  - **TypeScript** : add type-checking to JavaScript
-
 
 ## User Stories
 
