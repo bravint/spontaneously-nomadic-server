@@ -12,7 +12,7 @@ import {
 const options = {
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/redirect',
+    callbackURL: './auth/google/redirect',
     scope: ['profile', 'email'],
 };
 
