@@ -25,7 +25,7 @@ I wanted this server to reflect everything I have learnt over the course of my 6
 
 ## Upcoming Features
 
-Add abilty to have friends / followers to the server and client**
+Add abilty to have friends / followers to the server and client
 
 ## Technologies Used
 
